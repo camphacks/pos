@@ -1,0 +1,195 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/document.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script>
+
+
+	</head>
+	<body>
+		<container id="sales">
+			<header>
+				<div>
+					<img src="images/ce_logo_words_white.png" class="ce_logo" />
+					<h1>Camp Sales - Inspiring Christ-like change...</h1><h6>2.2016.7.2</h6>
+				</div>
+			</header>
+			<div>
+				<nav>
+					<div class="header">
+						<h2 >
+							Current User: <span data-name="user-name" data-loc="text"></span>
+						</h2>
+					</div>
+					<div class="tabs right">
+						<a href="#" id="logout" class="btn">Logout</a>
+					</div>
+					<div class="tabs">
+						<a href="#" id="admin" class="btn">Configure</a>
+					</div>				
+					<div class="tabs">
+						<a href="#" id="endday" class="btn">End Day</a>
+					</div>							
+					<div class="tabs left">
+						<a href="#" id="history" class="btn">History</a>
+					</div>								
+					<div style="clear:right;"/>		
+				</nav>
+				<content-wrapper >
+					<sidebar>	
+						<h3>Common Tasks</h3>
+						<ul class="hotkeys">
+							<li class="hotkey new-order">
+								<a class="btn" href="#" id="new">
+									<img />
+									<name>New Order</name>
+									<key data-code="112">(F1)</key>
+								</a>
+							</li>
+							<li class="hotkey checkout">
+								<a class="btn" href="#" id="checkout">
+									<img />
+									<name>Checkout</name>
+									<key data-code="113">(F2)</key>
+								</a>
+							</li>
+							<li class="hotkey find-item">
+								<a class="btn" href="#" id="find-item">
+									<img />
+									<name>Find Item</name>
+									<key data-code="114">(F3)</key>
+								</a>							
+							</li>
+							<li class="hotkey find-customer">
+								<a class="btn" href="#" id="find-guest">
+									<img />
+									<name>Find Guest</name>
+									<key data-code="115">(F4)</key>
+								</a>							
+							</li>
+						</ul>
+					</sidebar>
+				
+					<content class="tall">
+						<div class="pageSection">
+						<order-header class="infoSection">
+							<div>						
+								<h3>Order Information</h3>
+								<select id="transaction-type">
+									<option value="sale">Sale Mode</option>
+									<option value="return">Return Mode</option>								
+								</select>
+							</div>
+							<div id="order-info-div">
+								<table id="order-info">
+										<tr>
+											<td class="labelCol">Location</td>
+											<td class="dataCol"><span id="location" data-loc="text"></span></td>
+										</tr>
+										<tr>
+											<td class="labelCol">Invoice Number</td>
+											<td class="dataCol"><span id="invoice-number" data-loc="text"></span></td>
+										</tr>
+										<tr>
+											<td class="labelCol">Customer Type</td>
+											<td class="dataCol">
+												<select id="price_tiers">
+													<option value="">--N/A--</option>
+												</select>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+									
+							<div id="price-tier-section">
+								<h4>Pricing Level</h4>
+								<h1><price-tier class=""></price-tier></h1>
+							</div>
+						</order-header>
+						<div >
+							<h2 class="return error">RETURN MODE</h2>
+							<table class="items bumper">
+								<thead>
+									<tr>
+										<th></th>
+										<th>Item #</th>
+										<th>Color</th>
+										<th>Size</th>
+										<th class="floating">Description</th>
+										<th>Qty</th>
+										<th>Unit Price</th>
+										<th data-permissions="discount">Discount</th>
+										<th>Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>
+						<order-footer class="infoSection floatBottom">
+							<div class="account-info subSection">
+								<div>
+									<h3>Camp Account Lookup</h3>
+									<table id="camp_account">
+										<thead>
+											<tr>
+												<th class="labelCol">Name</th>
+												<th class="dataCol">
+													<input type="text" id="account-input" data-name="name" />
+													<img border="none" id="account-lookup" alt="" class="hoverIcon lookup" src="images/s.gif"/>
+													<img border="none" id="account-lookup" alt="" class="lookupIcon" src="images/s.gif"/>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td class="labelCol">Birthday</td>
+												<td class="dataCol"><span data-name="birth_date"></span></td>
+											</tr>
+											<tr>
+												<td class="labelCol">Balance</td>
+												<td class="dataCol">$<span data-name="amount"></span></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="vr">
+							</div>
+	
+							<div class="totals subSection">
+								<div>
+									<table>
+										<tr data-permissions="discount">
+											<td class="labelCol">Discount</td>
+											<td class="dataCol">$<span id="discount">0.00</span></td>
+										</tr>									
+										<tr>
+											<td class="labelCol">Subtotal</td>
+											<td class="dataCol">$<span id="subtotal">0.00</span></td>
+										</tr>
+										<tr>
+											<td class="labelCol">Tax</td>
+											<td class="dataCol">$<span id="tax">0.00</span></td>
+										</tr>
+										<tr>
+											<td class="labelCol"><strong>Total</strong></td>
+											<td class="dataCol">$<span id="total">0.00</span></td>
+										</tr>										
+									</table>
+								</div>
+							</div>
+						</order-footer>
+						</div>
+					</content>
+				</content-wrapper>	
+			</div>
+		</container>
+		<footer>
+		</footer>		
+	</body>
+</html>

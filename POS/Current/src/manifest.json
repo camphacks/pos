@@ -1,0 +1,25 @@
+{
+  "name": "Camp Sales",
+  "description": "The Camp Eagle Point of Sale system to be used in all retail locations.",
+  "version": "2.0.2016524",
+  "app": {
+    "background": {
+      "scripts": [
+      	"scripts/background.js", 
+      	"scripts/window.js"
+      ]
+    }
+  },
+  "icons": { 
+  	"16": "images/logo-16x16.png", 
+  	"128": "images/logo-128x128.png" 
+  },
+  "offline_enabled" : true,
+  "permissions" : [
+  	"https://campeagle.secure.force.com/pos/services/apexrest/PointOfSale/*",
+  	"http://campeagle.dev.cs15.force.com/pos/services/apexrest/PointOfSale/*",
+	"https://dev-campeagle.cs15.force.com/pos/services/apexrest/PointOfSale/*",
+  	"http://localhost/*"
+  ]
+}
+

@@ -1,0 +1,297 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/checkout.js"></script>
+		<script type="text/javascript" src="scripts/ccparse.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script>
+
+	</head>
+	<body>
+		<container id="sales">
+			<div>
+				<nav>
+					<div class="header">
+						<h2 >Checkout</h2>
+					</div>
+				</nav>
+				<content-wrapper>
+					<sidebar>	
+						<h3>Payment Methods</h3>
+						<ul class="hotkeys">
+							<li class="hotkey account">
+								<a class="btn" href="#account" data-name="account">
+									<img />
+									<name>Account</name>
+									<key data-code="113">(F2)</key>
+								</a>
+							</li>
+							<li class="hotkey cash">
+								<a class="btn" href="#cash" data-name="cash">
+									<img />
+									<name>Cash</name>
+									<key data-code="114">(F3)</key>
+								</a>
+							</li>
+							<li class="hotkey check">
+								<a class="btn" href="#check" data-name="check">
+									<img />
+									<name>Check</name>
+									<key data-code="115">(F4)</key>
+								</a>							
+							</li>
+							<li class="hotkey card">
+								<a class="btn" href="#card" data-name="card">
+									<img />
+									<name>Card</name>
+									<key data-code="116">(F5)</key>
+								</a>							
+							</li>
+							<li class="hotkey department">
+								<a class="btn" href="#department" data-name="department">
+									<img />
+									<name>Department</name>
+									<key data-code="117">(F6)</key>
+								</a>							
+							</li>							
+						</ul>
+					</sidebar>
+				
+					<content class="tall threeCol" data-name="payment" data-role="root">
+						<div id="default" class="toggle">
+							<inner>
+								<br/><br/><br/><br/><br/><br/><br>
+								<center>
+									<h2>Choose one or more payment methods</h2>
+								</center>
+							</inner>
+						</div>
+						
+						<div id="checkout" class="toggle">
+							<inner>
+								<br/><br/><br/><br/><br/><br/>
+								<center><h2>Processing Checkout...</h2></center>
+							</inner>
+						</div>
+						
+						<div id="error" class="toggle">
+							<inner>
+								<br/><br/><br/><br/><br/><br/>
+								<center><h2>There was an error. <br />Please contact your system administrator</h2></center>
+							</inner>
+						</div>						
+						<div id="account" class="toggle" data-name="account">
+							<inner>
+								<h2>Charge to Camp Account</h2>
+								<table>
+									<tr>
+										<td class="labelCol">Amount</td>
+										<td class="dataCol">
+											<input type="text" data-name="amount" data-default="true"  data-type="float" data-source="this" />
+											<input type="hidden" data-name="camp_account_id" data-source="this" />
+											<button class="clear">Clear</button>											
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol">Current Balance</td>
+										<td class="dataCol">
+											$<span id="current-balance"></span>
+										</td>
+									</tr>									
+									<tr>
+										<td class="labelCol">Remaining Balance</td>
+										<td class="dataCol">
+											$<span id="remaining-balance"></span>
+										</td>
+									</tr>									
+								</table>								
+							</inner>
+						</div>
+
+						<div id="cash" class="toggle" data-name="cash">
+							<inner>
+								<h2>Cash Entry</h2>
+								<table>
+									<tr>
+										<td class="labelCol">Amount</td>
+										<td class="dataCol">
+											<input type="text" data-name="amount" data-default="false" value="0.00" data-type="float" data-source="this" />
+											<button class="clear">Clear</button>
+										</td>
+									</tr>
+								</table>
+							</inner>
+						</div>
+
+						<div id="check" class="toggle" data-name="check">
+							<inner>
+								<h2>Check Entry</h2>
+								<table>
+									<tr>
+										<td class="labelCol">Amount</td>
+										<td class="dataCol">
+											<input type="text" data-name="amount" data-default="true" data-type="float" data-source="this" />
+											<button class="clear">Clear</button>
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol">Drivers License</td>
+										<td class="dataCol">
+											<input type="text" autocomplete="off" data-name="drivers_license" data-source="this" />
+										</td>
+									</tr>									
+									<tr>
+										<td class="labelCol">Check Number</td>
+										<td class="dataCol">
+											<input type="text" autocomplete="off" data-name="check_number" data-source="this" />
+										</td>
+									</tr>										
+								</table>
+							</inner>
+						</div>
+
+						<div id="card" class="toggle" data-name="credit_card">
+							<inner>
+								<h2>Credit Card Entry</h2>
+								<table>
+									<tr>
+										<td class="labelCol">Amount</td>
+										<td class="dataCol">
+											<input type="text" data-default="true" data-type="float" data-name="amount" data-source="this" />
+											<button class="clear">Clear</button>
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol"></td>
+										<td class="dataCol"></td>
+									</tr>
+									<tr>
+										<td class="labelCol"></td>
+										<td class="dataCol"></td>
+									</tr>
+									<tr>
+										<td class="labelCol"></td>
+										<td class="dataCol">
+											<h3>Card Information</h3>
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol">Name on Card</td>
+										<td class="dataCol">
+											<input type="text" autocomplete="off" data-name="name" data-source="reader" />
+										</td>										
+									</tr>
+									<tr>
+										<td class="labelCol">Card Number</td>
+										<td class="dataCol">
+											<input type="text" autocomplete="off" data-name="card_number" data-source="reader" />
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol">Card Expiration</td>
+										<td class="dataCol">
+											<input type="text" autocomplete="off" style="width:auto" data-name="expiration_month" size="2" maxlength="2" data-source="reader" />
+											&nbsp;/&nbsp;
+											<input type="text" autocomplete="off" style="width:auto" data-name="expiration_year" size="4" maxlength="4" data-source="reader" />
+										</td>										
+									</tr>
+								</table>
+								
+								<input type="hidden" autocomplete="off" data-name="track_1" />
+								<input type="hidden" autocomplete="off" data-name="track_2" />
+							</inner>
+						</div>
+						
+						<div id="department" class="toggle" data-name="department">
+							<inner>
+								<h2>Charge to Department</h2>
+								<table>
+									<tr>
+										<td class="labelCol">Amount</td>
+										<td class="dataCol">
+											<input type="text" data-name="amount" data-default="true" data-type="float" data-source="this" />
+											<button class="clear">Clear</button>
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol">Department</td>
+										<td class="dataCol">
+											<select data-name="department" id="departmentList">
+												<option value="">--Select a Department--</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td class="labelCol">Comments</td>
+										<td class="dataCol">
+											<textarea rows="5" data-name="comments"></textarea>
+									</tr>
+								</table>								
+							</inner>
+						</div>							
+					</content>
+					
+					<sidebar class="right">
+						<h3>Totals</h3>
+						<table>
+							<tr>
+								<td class="labelCol">Total</td>
+								<td class="dataCol">$<span data-source="value" data-name="total"></span></td>
+							</tr>
+							<tr class="blank_row">
+								<td colspan="2"/>
+							</tr>
+							<tr class="tenders" >
+								<td class="labelCol">Account</td>
+								<td class="dataCol">$<span data-source="tenders" data-name="account"></span></td>
+							</tr>
+							<tr class="tenders" >
+								<td class="labelCol">Cash</td>
+								<td class="dataCol">$<span data-source="tenders" data-name="cash" data-change="true"></span></td>
+							</tr>
+							<tr class="tenders" >
+								<td class="labelCol">Check</td>
+								<td class="dataCol">$<span data-source="tenders" data-name="check"></span></td>
+							</tr>
+							<tr class="tenders" >
+								<td class="labelCol">Card</td>
+								<td class="dataCol">$<span data-source="tenders" data-name="card"></span></td>
+							</tr>
+							<tr class="tenders" >
+								<td class="labelCol">Department</td>
+								<td class="dataCol">$<span data-source="tenders" data-name="department"></span></td>
+							</tr>		
+							<tr class="blank_row" >
+								<td colspan="2"/>
+							</tr>												
+							<tr>
+								<td class="labelCol">Remaining</td>
+								<td class="dataCol">$<span data-source="formula" data-name="remaining"></span></td>
+							</tr>
+							<tr>
+								<td class="labelCol">Change</td>
+								<td class="dataCol">$<span data-source="formula" data-name="change"></span></td>
+							</tr>
+						</table>
+						<div class="bottom">
+							<ul class="plain">
+								<li class="center">
+									<div class="error return">RETURN MODE</div>
+								</li>
+								<li class="hotkey">
+									<a class="btn" href="#checkout" data-name="checkout">
+										<img />
+										<name>Checkout</name>
+										<key data-code="118">(F7)</key>
+									</a>							
+								</li>
+							</ul>
+						</div>
+					</sidebar>
+				</content-wrapper>	
+			</div>
+		</container>	
+	</body>
+</html>

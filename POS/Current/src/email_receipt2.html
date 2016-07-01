@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/email_receipt.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script>
+	</head>
+	<body>
+		<container>
+			<div>
+				<nav>
+					<div class="header">
+						<h2 >Confirmation and Receipt</h2>
+					</div>
+				</nav>
+				<content-wrapper>
+					<content class="standalone">
+						<div class="pageSection">
+							<center>
+								<div style='max-height: 150px; overflow-y: auto; border: solid 1px #000;'>
+									<table id='items' style="font-size: 12px;">
+										<tr style='text-decoration: underline;'><td style='width: 150px;'>Item</td><td style='width: 50px;'>Price</td><td>Quantity</td><td>Subtotal</td></tr>
+									</table>
+								</div>
+							</center>
+							<center style="font-size: 20px; font-weight: bold;">Please confirm $<span id='amt'></span> to spent on the items listed above?</center>
+							<center><input type="text" id="email" placeholder="Please enter email if you desire a receipt" style="width: 380px; font-size: 20px;" /></center>
+							<br/><br/>
+							<button style="padding: 80px; font-size: 36px;" id="agree">Confirm</button>
+							<button style="padding: 50px; margin-left: 100px;" id="cancel">Cancel transaction</button>
+						</div>
+					</content>			
+				</content-wrapper>	
+			</div>
+		</container>	
+	</body>
+</html>

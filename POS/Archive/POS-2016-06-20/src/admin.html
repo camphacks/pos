@@ -1,0 +1,108 @@
+<html ng-app ng-csp>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/angular.js"></script>		
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script>
+		<script type="text/javascript" src="scripts/admin.js"></script>
+	</head>
+	<body ng-controller="AdminCtrl">
+		<container>
+			<div>
+				<nav>
+					<div class="header"> 
+						<h2>Administration</h2>
+					</div>	
+				</nav>
+				<content-wrapper>
+					<content class="standalone">
+						<div class="pageSection">
+							<table>
+								<tr>
+									<td class="labelCol">SalesForce Machine ID</td>
+									<td class="dataCol"><input type="text" ng-model="model.machine_id" />&nbsp;<a target="_blank" href="https://na15.salesforce.com/a0i/o">Machine List</a></td>
+								</tr>
+								<tr>
+									<td class="labelCol">Invoice Prefix</td>
+									<td class="dataCol"><input type="text" ng-model="model.invoice_prefix" /></td>
+								</tr>
+								<!--
+								<tr>
+									<td class="labelCol">Cash Drawer Code</td>
+									<td class="dataCol"><input type="text" ng-model="model.drawer_code" />&nbsp;<a target="_blank" href="http://keyhut.com/popopen.htm">Common Codes</a></td>
+								</tr>								
+								<tr>
+									<td class="labelCol">Cut Paper Code</td>
+									<td class="dataCol"><input type="text" ng-model="model.cut_code" />&nbsp;<a target="_blank" href="http://keyhut.com/popopen.htm">Common Codes</a></td>
+								</tr>				
+								<tr>
+									<td class="labelCol">Receipt Printer</td>
+									<td class="dataCol">
+										<select ng-model="model.printer" ng-change="setPrinter()" ng-options="p for p in printers">
+										</select>
+									</td>
+								</tr>
+								-->
+								
+								<tr>
+									<td class="labelCol">Live Mode</td>
+									<td class="dataCol">
+										<input type="button" value="Change to {{model.live_mode===1 ? 'sandboxed':'live'}} mode" ng-click="changeMode();" />
+									</td>
+								</tr>
+								
+								<tr>
+									<td class="labelCol">Campus</td>
+									<td class="dataCol">{{model.campus}}</td>
+								</tr>
+								<tr>
+									<td class="labelCol">Location</td>
+									<td class="dataCol">{{model.location}}</td>
+								</tr>
+								<tr>
+									<td class="labelCol">Last Sync</td>
+									<td class="dataCol">{{prettyDate(model.last_sync);}}</td>
+								</tr>
+								<tr>
+									<td class="labelCol"></td>
+									<td class="dataCol">
+										<input type="button" ng-click="sync(false)" value="Synchronize"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="labelCol"></td>
+									<td class="dataCol">
+										<input type="button" ng-click="sync(true)" value="Force Synchronize All"/>
+									</td>
+								</tr>
+								<tr>
+									<td class="labelCol"></td>
+									<td class="dataCol">
+										<input type="button" ng-click="deleteDB()" value="Reset All" />
+									</td>
+								</tr>
+								<!--
+								<tr>
+									<td class="labelCol"></td>
+									<td class="dataCol">
+										<input type="button" ng-click="openDrawer(true)" value="Test Cash Drawer" />
+									</td>
+								</tr>
+								-->
+								<tr>
+									<td class="labelCol"></td>
+									<td class="dataCol">
+										<button ng-click="save()">Save</button>
+										<button ng-click="close()">Close</button>										
+									</td>
+								</tr>								
+							</table>
+						</div>
+					</content>
+				</content-wrapper>	
+			</div>
+		</container>
+	</body>
+</html>

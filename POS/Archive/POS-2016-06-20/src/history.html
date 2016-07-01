@@ -1,0 +1,57 @@
+<html ng-app ng-csp>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/angular.js"></script>				
+		<script type="text/javascript" src="scripts/history.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>		
+		<script type="text/javascript" src="scripts/utils.js"></script>
+	</head>
+	<body ng-controller="HistoryController">
+		<container>
+			<div>
+				<nav>
+					<div class="header">
+						<h2 >History</h2>
+					</div>
+				</nav>
+				<content-wrapper>
+					<content class="standalone">
+						<div class="pageSection">
+							<label for="months">Month</label>
+							<select id="months" ng-model="model.month" ng-options="m for m in model.months">
+							</select>
+							
+							<label for="years">Year</label>
+							<select id="years" ng-model="model.year" ng-options="y for y in model.years">
+							</select>
+
+							<button ng-click="search()">Go</button>
+						</div>
+						<div class="pageSection">
+							<table class="items" >
+								<thead>
+									<tr>
+										<th class="floating">Day</th> 
+										<th>Start Day</th>
+										<th>Cash Gain</th>
+										<th>Check Gain</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="day in model.results track by $id(day.day_id)" >
+										<td>{{day.day_number}}</td>
+										<td class="floating">{{day.day_start}}</td>
+										<td>{{day.cash_gain.money()}}</td>
+										<td>{{day.check_gain.money()}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>		
+					</content>			
+				</content-wrapper>	
+			</div>
+		</container>	
+	</body>
+</html>

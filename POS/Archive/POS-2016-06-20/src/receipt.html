@@ -1,0 +1,123 @@
+<html ng-app ng-csp>
+	<head>		
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/html2canvas.js"></script>
+		<script type="text/javascript" src="scripts/angular.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/receipt.js"></script>
+		
+		<style >
+			tr.blank_row {
+				height: 10px;
+			}
+	</style>
+	</head>
+	<body ng-controller="ReceiptCtrl" style="">
+		<div id="content" style="page-break-after: always;">
+			<table style="width: 140px; font-size:8px; font-weight:lighter; " cellspacing="0px" >
+				<thead>
+					<tr><td style="text-align: center; padding:0px;" colspan="2">{{location.campus}}</td></tr>
+					<tr><td style="text-align: center; padding:0px;" colspan="2">{{location.location}}</td></tr>
+					<tr class="blank_row" />
+					<tr><td style="text-align: center; padding:0px;" colspan="2">{{location.street}}</td></tr>	
+					<tr><td style="text-align: center; padding:0px;" colspan="2">{{location.city}}, {{location.state}} {{location.zip}}</td></tr>
+					<tr><td style="text-align: center; padding:0px;" colspan="2">{{location.phone}}</td></tr>
+					<tr><td style="text-align: center; padding:0px;" colspan="2">{{transaction.transaction_date}}</td></tr>
+				</thead>
+				<tbody>
+					<tr class="blank_row"/>
+
+					<tr><td colspan="2"><strong>{{transaction.transaction_type.capitalize()}}</strong></td></tr>
+					<tr >
+						<td style="text-transform: uppercase;">Invoice #</td>
+						<td style="text-align: right;">{{transaction.invoice}}</td>
+					</tr>
+										
+					<tr class="blank_row"/>
+
+					<!-- START LINE ITEMS -->
+					<tr style="padding: 15px 0px;" ng-repeat="item in transaction.line_items"> 
+						<td>{{item.name}}</td>
+						<td style="text-align: right;">
+							<div>{{(item.amount*item.quantity).money()}}</div>
+							<div style="{{hide(item.discount > 0)}}">({{(item.discount*item.quantity).money()}})</div>
+						</td>
+					</tr>
+					<!-- END LINE ITEMS -->						
+					
+					<tr>
+						<td></td>
+						<td style="text-align: right;">----------</td>
+					</tr>						
+					
+					<tr>
+						<td style="text-transform: uppercase;">Total</td>
+						<td style="text-align: right;">{{transaction.total.money()}}</td>
+					</tr>
+
+					<tr class="blank_row"/>	
+					
+					<tr>
+						<td style="text-transform: uppercase;"><strong>Payment</strong></td>
+					</tr>
+
+					<tr class="payment" style="{{hide(transaction.payment.cash != undefined)}}">
+						<td style="text-transform: uppercase;">Cash</td>
+						<td style="text-align: right;">{{transaction.payment.cash.amount.money()}}</span></td>						
+					</tr>
+					
+					<tr class="payment" style="{{hide(transaction.payment.check != undefined)}}">
+						<td style="text-transform: uppercase;">Check</td>
+						<td style="text-align: right;">{{transaction.payment.check.amount.money()}}</span></td>						
+					</tr>
+					
+					<tr class="payment" style="{{hide(transaction.payment.account != undefined)}}">
+						<td style="text-transform: uppercase;">Account</td>
+						<td style="text-align: right;">{{transaction.payment.account.amount.money()}}</span></td>						
+					</tr>
+					
+										
+					<!-- SHOW CREDIT CARD -->										
+					<tr class="payment" style="{{hide(transaction.payment.credit_card != undefined)}}">
+						<td style="text-transform: uppercase;">Card *{{transaction.payment.credit_card.card_number.right(4)}}</td>
+						<td style="text-align: right;">{{transaction.payment.credit_card.amount.money()}}</span></td>						
+					</tr>
+					
+					<!-- SHOW DEPARTMENT -->
+					<tr class="payment" style="{{hide(transaction.payment.department != undefined)}}">
+						<td style="text-transform: uppercase;">Department</td>
+						<td style="text-align: right;">{{transaction.payment.department.amount.money()}}</span></td>						
+					</tr>
+										
+					
+					<tr class="blank_row" style="{{hide(transaction.payment.credit_card != undefined)}}"/>	
+					
+					<tr class="blank_row" style="{{hide(transaction.payment.credit_card != undefined)}}"/>
+					
+					<tr style="{{hide(transaction.payment.credit_card != undefined)}}">
+						<td colspan="2">X<hr style="width:95%; border:0; height:1px; background:black;" /></td>
+					</tr>
+					
+					<tr style="	text-align: center; {{hide(transaction.payment.credit_card != undefined)}}" >
+						<td colspan="2">{{transaction.payment.credit_card.name}}</td>
+					</tr>
+					
+					<tr class="blank_row" style="{{hide(transaction.payment.credit_card != undefined)}}"/>					
+					
+					<tr style="text-align: center; {{hide(transaction.payment.credit_card != undefined)}}">
+						<td colspan="2" >I agree to pay the above amount according to the card issuer agreement.</td>
+					</tr>
+					<tr class="blank_row"/>
+				</tbody>
+						
+				<tfoot>
+					<tr> 
+						<td style="text-align: center;" colspan="2"><strong>Thank You!</strong></td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+		<canvas id="hidden_print" style="display:none" >
+		</canvas>
+	</body>
+</html>

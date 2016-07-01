@@ -1,0 +1,59 @@
+<html ng-app="Lookup" ng-csp>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/angular.js"></script>				
+		<script type="text/javascript" src="scripts/item_lookup.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>		
+		<script type="text/javascript" src="scripts/utils.js"></script>
+	</head>
+	<body ng-controller="LookupController">
+		<container>
+			<div>
+				<nav>
+					<div class="header">
+						<h2 >Item Lookup</h2>
+					</div>
+				</nav>
+				<content-wrapper>
+					<content class="standalone">
+						<div class="pageSection">
+							<input type="text" ce-enter="query();" ng-model="model.sku" ng-change="model.sku = model.sku.getNumeric();" placeholder="Item #"/>
+							<input type="text" ce-enter="query();" ng-model="model.name" autofocus="" placeholder="Item Name"/>
+							<button ng-click="query()">Find</button>
+						</div>
+						<div class="pageSection">
+							<span class="message {{model.results === undefined ? '' : 'hidden'}}">Enter an item number or name</span>
+							<span class="message {{model.results.length === 0 ? '' : 'hidden'}}">No items found</span>
+							<table class="items {{model.results.length > 0 ? '' : 'hidden'}}" >
+								<thead>
+									<tr>
+										<th></th>
+										<th>Item #</th> 
+										<th class="floating">Item Name</th>
+										<th>Color</th>
+										<th>Size</th>
+										<th>Stock</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-dblclick="select(merch)" ng-repeat="merch in model.results track by $id(merch.sku)" >
+										<td>
+											<button class="discrete" ng-click="select(merch)" >Select</button>
+										</td>
+										<td>{{merch.sku}}</td>
+										<td class="floating">{{merch.name}}</td>
+										<td>{{merch.color || 'N/A'}}</td>
+										<td>{{merch.size || 'N/A'}}</td>
+										<td>{{(merch.quantity || merch.quantity === 0) ? merch.quantity : ''}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>		
+					</content>			
+				</content-wrapper>	
+			</div>
+		</container>	
+	</body>
+</html>

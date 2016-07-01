@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/guest_lookup.js"></script>
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script>
+	</head>
+	<body>
+		<container>
+			<div>
+				<nav>
+					<div class="header">
+						<h2 >Guest Lookup</h2>
+					</div>
+				</nav>
+				<content-wrapper>
+					<content class="standalone">
+						<div class="pageSection">
+							<input type="text" id="fname" placeholder="First Name"/>
+							<input type="text" id="lname" placeholder="Last Name"/>
+							<button id="find" >Find</button>
+						</div>
+						<div class="pageSection">
+							<span class="message" id="initMessage">Enter a guest's name</span>
+							<span class="message" id="emptyMessage">No guests found</span>
+							<table class="items" id="items">
+								<thead>
+									<tr>
+										<th></th>
+										<th>First Name</th> 
+										<th class="floating">Last Name</th>
+										<th>Birth Date</th>
+										<th>Event</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+								</tbody>
+							</table>
+						</div>		
+					</content>			
+				</content-wrapper>	
+			</div>
+		</container>	
+	</body>
+</html>

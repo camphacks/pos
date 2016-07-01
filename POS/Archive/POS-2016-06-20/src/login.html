@@ -1,0 +1,37 @@
+<html ng-app ng-csp>
+	<head>
+		<link rel="stylesheet" type="text/css" href="styles/styles.css" />
+		
+		<script type="text/javascript" src="scripts/jquery-2.0.3.js"></script>
+		<script type="text/javascript" src="scripts/angular.min.js"></script>		
+		<script type="text/javascript" src="scripts/objects.js"></script>
+		<script type="text/javascript" src="scripts/database.js"></script>
+		<script type="text/javascript" src="scripts/sforce.js"></script>	
+		<!--<script type="text/javascript" src="scripts/print-net.js"></script> 	-->
+		<script type="text/javascript" src="scripts/sha256.js"></script>
+		<script type="text/javascript" src="scripts/enc-base64-min.js"></script>
+		<script type="text/javascript" src="scripts/utils.js"></script> 
+		<script type="text/javascript" src="scripts/login.js"></script> 
+	</head>
+	<body ng-controller="LoginController">
+		<div id="login_content">
+			<center><h2>Camp Sales - Login</h2></center>
+			<table>
+				<tr>
+					<td class="labelCol">Email</td>
+					<td class="dataCol"><input type="text" ng-model="data.user" /></td>
+				</tr>
+				<tr>
+					<td class="labelCol">Password</td>
+					<td class="dataCol"><input type="password" ng-model="data.password" /></td>
+				</tr>				
+				<tr>
+					<td class="labelCol"></td>
+					<td class="dataCol">
+						<button type="submit" ng-click="login();">Login</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
