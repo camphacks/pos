@@ -597,9 +597,9 @@ var CE = (function(ce_){
 			row.push('<td><center><span class="color"/></center></td>');
 			row.push('<td><center><span class="size"/></center></td>');
 			row.push('<td class="floating"><span class="desc" /></td>');
-			row.push('<td><input class="qty" maxlength="3" type="text" value="0" /></td>');
 			row.push('<td>$<span class="unit">0.00</span></td>');
-			row.push('<td data-permissions="discount">$<input type="text" class="discount" value="0.00" /></td>');
+			row.push('<td><input class="qty" maxlength="3" type="text" value="0" /></td>');
+			// row.push('<td data-permissions="discount">$<input type="text" class="discount" value="0.00" /></td>');
 			row.push('<td>$<span class="amt">0.00</span></td>');			
 			row.push('</tr>');
 			
@@ -686,9 +686,10 @@ var CE = (function(ce_){
 			$(this).find('input.discount').attr('data-max', amt); //Set the max discount to the amount of the unit price
 			$(this).find('span.unit').text( amt ); //Set the unit price span element
 			
-			disc = parseFloat( $(this).find('input.discount').val() );//Find the discount amount from the input element
+			// disc = parseFloat( $(this).find('input.discount').val() );//Find the discount amount from the input element
 			qty = parseInt( $(this).find('input.qty').val() ); //find quantity amount from input element
-			sub = (amt - disc) * qty; // Calc total for row
+			// sub = (amt - disc) * qty;
+			sub = amt * qty; // Calc total for row without discount
 			$(this).find('span.amt').text(sub.toFixed(2)); //set subtotal on line item
 
 			values.subtotal += sub; //add subtotal to the overall subtotal

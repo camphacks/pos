@@ -15,7 +15,9 @@ a.del{
 }
 select{
 	padding:3px;
-	font-size:14px;
+	font-size:16px;
+	min-width: 30px;
+    min-height: 30px;
 }
 
 @font-face{
@@ -85,14 +87,21 @@ nav .header {
 	color: white;	
 }
 
-nav .header h2 {
+nav .header > h2 {
 	text-shadow: 1px 1px 2px rgba(255,255,255,.7);
 	color: #423825;
+	margin-bottom: 0px;
+}
+
+nav .header  span {
+/*	text-shadow: 1px 1px 2px rgba(255,255,255,.7);*/
+	color: white;
 }
 
 nav .header span {
-/*	text-shadow: 1px 1px 2px rgba(255,255,255,.7);*/
-	color: white;
+	font-size: 10px;
+	color: gray;
+	margin-left: 5px;
 }
 
 nav .tabs {
@@ -135,6 +144,18 @@ nav .tabs.left a {
 	border-left: 1px solid rgba(2, 2, 2, 0.28);
 	border-top: 1px solid rgba(250, 250, 250, 0.27);		
 	height: 100%;		
+}
+
+#login_content input{
+	min-width: 0px;
+	min-height: 0px;
+	font-size: 16px;
+}
+
+body button{
+	min-height: 44px;
+    min-width: 44px;
+    font-size: 18px;
 }
 
 button, 
@@ -220,11 +241,15 @@ container {
 content-wrapper {
 	background-color: white;
 	width: 100%;
-	display: block;
+	/*display: block;*/
 	border-radius: 0 0 10px 10px;
 	-webkit-box-shadow: 0 0 3px rgba(1, 1, 1, 0.7);
-	box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);	
+	/*box-shadow: 0 0 5px rgba(1, 1, 1, 0.7);	*/
 	position: relative;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 footer {
@@ -239,12 +264,13 @@ footer {
 
 sidebar {
 	font-family: interstate-bold;
-	background-image: -webkit-radial-gradient(left, #f2f2f2, #fff 60%);	
+	margin: 0px 15px;
+	/*background-image: -webkit-radial-gradient(left, #f2f2f2, #fff 60%);	
 	border-left: 0;
-	width: 20%;
-	display: inline-block;
+	/*width: 20%;*/
+	/*display: inli: ;ne-block;*/
 /*	border:1px solid #dcdcdc;*/
-	vertical-align: top;
+	/*vertical-align: top;*/
 }
 
 sidebar.right {
@@ -260,9 +286,9 @@ sidebar h3 {
 }
 
 content {
-	width: 79%;
+	/*width: 79%;
 	display: inline-block;	
-	vertical-align: top;
+	vertical-align: top;*/
 	min-height: 320px;
 }
 content.tall {
@@ -306,6 +332,7 @@ ul.plain {
 .floatBottom {
 	position: absolute;
 	bottom: 0px;
+	right: 15px;
 }
 
 .message {
@@ -360,6 +387,13 @@ li.hotkey key {
 	display: block;
 }
 
+.infoSection.floatBottom {
+	display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
 order-header {
 	border-radius: 0 0 5px 5px;
 	height: 90px;
@@ -367,25 +401,29 @@ order-header {
 }
 
 order-footer {
-	border-radius: 10px 10px 0 0;
-	margin-top: 80px;
-	margin-bottom: 0px;
-	height: 170px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-	padding-right: 10px;
-	padding-left: 10px;
-	width: 69.5%;
+	width: 60%;
 }
 
+.no-padding {
+	padding-right: 0px;
+	padding-left: 0px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+}
+
+flex--column{
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
 
 .pageSection .subSection {
-	display: inline-block;
+	/*display: inline-block;
 	margin: 0 2%;
 	height: 100%;	
 	vertical-align: top;
 	padding-top: 5px;
-	padding-bottom: 5px;
+	padding-bottom: 5px;*/
 }
 
 order-footer .account-info {
@@ -393,7 +431,7 @@ order-footer .account-info {
 }
 
 order-footer .totals.subsection {
-	width: 30%;
+	/*width: 30%;*/
 	padding: 5px 0px;
 }
 
@@ -402,13 +440,9 @@ order-footer .totals.subsection {
 }
 
 .vr {
-	border-left: 4px solid #BBB;
-	height: 100%;
-	width: 0px;
-	margin: 0;
-	display: inline-block;
-	box-shadow: 0px 0px 5px rgba(1, 1, 1, 0.5);
-	border-radius: 2px;
+	border-left: 3px solid #c4c4c4;
+	height: 23vh;
+	margin: 0px 15px;
 }
 
 order-header div {
@@ -524,12 +558,14 @@ table.items th,
 table.items td {
   border: 1px gainsboro solid;
   padding: 3px;
+
 }
 table.items th {
-  background: gainsboro;
-  text-align: left;
-  font-size: 16px;
-  font-family: interstate-reg;
+	background: gainsboro;
+  	text-align: left;
+  	font-size: 16px;
+  	font-family: interstate-reg;
+  	color: #747474;
 }
 
 table.items caption {
@@ -655,14 +691,17 @@ textarea {
 	padding: 6px 5px;
 	font-size: 16px;
 	background-color: #fff;
-	border: none;
+	border: 1px solid #a9a9a9;
 	outline: none;
-	box-shadow: inset 0px 0px 4px rgba(0,0,0,0.75), inset 0 0 0px rgba(0,0,0,0.35);
-	-webkit-box-shadow: inset 0px 0px 4px rgba(0,0,0,0.75), inset 0 0 0px rgba(0,0,0,0.35);
+	/*box-shadow: inset 0px 0px 4px rgba(0,0,0,0.75), inset 0 0 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: inset */0px 0px 4px rgba(0,0,0,0.75), inset 0 0 0px rgba(0,0,0,0.35);
 	border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-webkit-appearance: none;
 	-webkit-font-smoothing: antialiased;
+	min-height: 44px;
+    min-width: 44px;
+    font-size: 18px;
 }
 
 .toggle {

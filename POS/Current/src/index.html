@@ -11,18 +11,19 @@
 	</head>
 	<body>
 		<container id="sales">
-			<header>
+			<!-- <header>
 				<div>
 					<img src="images/ce_logo_words_white.png" class="ce_logo" />
 					<h1>Camp Sales - Inspiring Christ-like change...</h1><h6>2.2016.7.2</h6>
 				</div>
-			</header>
+			</header> -->
 			<div>
 				<nav>
 					<div class="header">
 						<h2 >
 							Current User: <span data-name="user-name" data-loc="text"></span>
 						</h2>
+						<span>version: 2.8.2</span>
 					</div>
 					<div class="tabs right">
 						<a href="#" id="logout" class="btn">Logout</a>
@@ -120,9 +121,9 @@
 										<th>Color</th>
 										<th>Size</th>
 										<th class="floating">Description</th>
-										<th>Qty</th>
 										<th>Unit Price</th>
-										<th data-permissions="discount">Discount</th>
+										<th>Qty</th>
+										<!-- <th data-permissions="discount">Discount</th> -->
 										<th>Amount</th>
 									</tr>
 								</thead>
@@ -158,16 +159,15 @@
 									</table>
 								</div>
 							</div>
-							<div class="vr">
-							</div>
+							<div class="vr"></div>
 	
 							<div class="totals subSection">
 								<div>
 									<table>
-										<tr data-permissions="discount">
+										<!-- <tr data-permissions="discount">
 											<td class="labelCol">Discount</td>
 											<td class="dataCol">$<span id="discount">0.00</span></td>
-										</tr>									
+										</tr>		 -->							
 										<tr>
 											<td class="labelCol">Subtotal</td>
 											<td class="dataCol">$<span id="subtotal">0.00</span></td>
