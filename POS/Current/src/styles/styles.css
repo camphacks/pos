@@ -247,7 +247,7 @@ container {
 
 
 container > div > content-wrapper {
-    min-height: 83vh;
+    min-height: 85vh;
 	background: #efefef;
 }
 
