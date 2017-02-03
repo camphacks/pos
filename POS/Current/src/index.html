@@ -6,7 +6,7 @@
 		<script type="text/javascript" src="scripts/objects.js"></script>
 		<script type="text/javascript" src="scripts/document.js"></script>
 		<script type="text/javascript" src="scripts/utils.js"></script>
-
+		<title>Camp Eagle Group Camp Sales</title>
 
 	</head>
 	<body>
@@ -76,60 +76,62 @@
 				
 					<content class="tall">
 						<div class="pageSection">
-						<order-header class="infoSection">
-							<div>						
-								<h3>Order Information</h3>
-								<select id="transaction-type">
-									<option value="sale">Sale Mode</option>
-									<option value="return">Return Mode</option>								
-								</select>
-							</div>
-							<div id="order-info-div">
-								<table id="order-info">
+							<order-header class="infoSection">
+								<div>						
+									<h3>Order Information</h3>
+									<select id="transaction-type">
+										<option value="sale">Sale Mode</option>
+										<option value="return">Return Mode</option>								
+									</select>
+								</div>
+								<div id="order-info-div">
+									<table id="order-info">
+											<tr>
+												<td class="labelCol">Location</td>
+												<td class="dataCol"><span id="location" data-loc="text"></span></td>
+											</tr>
+											<tr>
+												<td class="labelCol">Invoice Number</td>
+												<td class="dataCol"><span id="invoice-number" data-loc="text"></span></td>
+											</tr>
+											<tr>
+												<td class="labelCol">Customer Type</td>
+												<td class="dataCol">
+													<select id="price_tiers">
+														<option value="">--N/A--</option>
+													</select>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+										
+								<div id="price-tier-section">
+									<h4>Pricing Level</h4>
+									<h1><price-tier class=""></price-tier></h1>
+								</div>
+							</order-header>
+							<div >
+								<h2 class="return error">RETURN MODE</h2>
+								<table class="items bumper">
+									<thead>
 										<tr>
-											<td class="labelCol">Location</td>
-											<td class="dataCol"><span id="location" data-loc="text"></span></td>
+											<th></th>
+											<th>Item #</th>
+											<th>Color</th>
+											<th>Size</th>
+											<th class="floating">Description</th>
+											<th>Unit Price</th>
+											<th>Qty</th>
+											<!-- <th data-permissions="discount">Discount</th> -->
+											<th>Amount</th>
 										</tr>
-										<tr>
-											<td class="labelCol">Invoice Number</td>
-											<td class="dataCol"><span id="invoice-number" data-loc="text"></span></td>
-										</tr>
-										<tr>
-											<td class="labelCol">Customer Type</td>
-											<td class="dataCol">
-												<select id="price_tiers">
-													<option value="">--N/A--</option>
-												</select>
-											</td>
-										</tr>
+									</thead>
+									<tbody>
 									</tbody>
 								</table>
 							</div>
-									
-							<div id="price-tier-section">
-								<h4>Pricing Level</h4>
-								<h1><price-tier class=""></price-tier></h1>
-							</div>
-						</order-header>
-						<div >
-							<h2 class="return error">RETURN MODE</h2>
-							<table class="items bumper">
-								<thead>
-									<tr>
-										<th></th>
-										<th>Item #</th>
-										<th>Color</th>
-										<th>Size</th>
-										<th class="floating">Description</th>
-										<th>Unit Price</th>
-										<th>Qty</th>
-										<!-- <th data-permissions="discount">Discount</th> -->
-										<th>Amount</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+						
 						</div>
 						<order-footer class="infoSection floatBottom">
 							<div class="account-info subSection">
@@ -184,7 +186,6 @@
 								</div>
 							</div>
 						</order-footer>
-						</div>
 					</content>
 				</content-wrapper>	
 			</div>
