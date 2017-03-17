@@ -1,10 +1,29 @@
 var CE = (function(ce_){
 	"use strict";
-	
 	/*
 	 * Called once on page load
 	 */
-	$(document).ready(function() { 
+	
+	function documentInit()
+	{			
+		console.log(Date.now() + ' loading document.js...');
+		console.log(ce_);
+		console.log('POS..');
+		if(CE == null)
+			CE = ce_;
+		console.log(CE.POS);
+		if(typeof CE.POS != 'undefined')
+			initializeDocument();
+		else
+			setTimeout(documentInit, 100);
+	}
+	
+	$(document).ready(function() {
+		documentInit();
+	});
+	
+	function initializeDocument()
+	{
 		CE.util.loader.start();
 		
 		//If the window closes, make sure we logout
@@ -27,7 +46,7 @@ var CE = (function(ce_){
 				CE.log.error("Error trying to sync.", e);
 				CE.util.alert("Error","Error trying to sync. Contact support immediately.");
 			}).always(CE.util.loader.stop);
-	});
+	}
 
 	/*
 	 * Used to store values for the current invoice

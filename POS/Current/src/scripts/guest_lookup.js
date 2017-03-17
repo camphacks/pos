@@ -1,7 +1,20 @@
 (function() { 
 	"use strict";
 	
+	function guestlookupInit()
+	{
+		if(typeof CE.POS != 'undefined')
+			initializeGuestlookup();
+		else
+			setTimeout(guestlookupInit, 100);
+	}
+	
 	$(document).ready(function() {
+		guestlookupInit();
+	});
+	
+	function initializeGuestlookup()
+	{
 		/* Listeners */
 		$('button#find').click(query);
 		$('input').keydown(function(e) { if(e.keyCode == 13) query(); });
@@ -15,7 +28,7 @@
 		CE.POS.sync(0,1).then(function() { initDefault(); }).always(CE.util.loader.stop);
 		// comment out function below
 		//initDefault();
-	});
+	}
 	
 	function initDefault()
 	{

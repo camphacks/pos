@@ -3,7 +3,25 @@ function LoginController($scope) {
 	
 	//Run the loader until the database is ready
 	CE.util.loader.start();	
-	CE.DB.promise.done(CE.util.loader.stop);
+	//CE.DB.promise.done(CE.util.loader.stop);
+	
+	navigatorOnLine = false;
+	// Assign handlers immediately after making the request,
+	// and remember the jqXHR object for this request
+	var jqxhr = $.ajax("https://campeagle.org/index.php")
+	.done(function()
+	{
+		navigatorOnLine = true;
+	})
+	.fail(function()
+	{
+		navigatorOnLine = false;
+	})
+	.always(function()
+	{
+		CE.DB.promise.done(CE.util.loader.stop);
+		console.log('navigator:' + navigatorOnLine);
+	});	
 
 	//Holds login data: user, password
 	$scope.data = {};

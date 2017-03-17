@@ -110,9 +110,10 @@
 			// upon return/callback, call checkout
 			console.log(paymentType);
 			//if(paymentType == 'card')
+			if(navigatorOnLine)
 				launchEmailReceipt();
-			//else
-			//	checkout();
+			else
+				checkout();
 			return;
 		}
 		
@@ -428,7 +429,8 @@
 				if( $sect.find('input[data-name=name]').val().length == 0)
 					valid = false;
 				
-				if(!navigator.onLine)
+				//if(!navigator.onLine)
+				if(!navigatorOnLine)
 				{
 					if(valid)
 						CE.util.alert('Offline', 'The system is currently offline. Credit Cards cannot be processed while offline');
@@ -455,7 +457,8 @@
 		if( typeof values.account == 'undefined')
 			disable.push('.account');
 			
-		if(!navigator.onLine)
+		//if(!navigator.onLine)
+		if(!navigatorOnLine)
 			disable.push('.card');
 			
 		var promise = CE.DB.session.permissions.department();

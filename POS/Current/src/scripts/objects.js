@@ -1,3 +1,5 @@
+var navigatorOnLine = false;
+
 function Account(mod, id, evt_id, amt, fname, lname, gender, dob, evt_name, evt_start, evt_end){
 	this.mod_time = mod;
 	this.id = id;

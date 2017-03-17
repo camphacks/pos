@@ -60,7 +60,7 @@
  *	logout
  *	configure
  *
- */
+ */ 
 var CE = (function(ce_){
 	"use strict";
 	
@@ -74,7 +74,8 @@ var CE = (function(ce_){
 		CE.log.info("Synchronize started. Should sync all: ", isAll);
 		
 		//If browser is offline, quit and log the failed trye
-		if(!navigator.onLine)
+		//if(!navigator.onLine)
+		if(!navigatorOnLine)
 		{
 			CE.log.warn("Currently offline. Quitting sync.");
 			
@@ -153,7 +154,8 @@ var CE = (function(ce_){
 	 */
 	var login = function(un, pw){
 		//If we are online
-		if(navigator.onLine)
+		//if(navigator.onLine)
+		if(navigatorOnLine)
 		{
 			//Setup request info
 			var action = 'Login';
@@ -219,7 +221,8 @@ var CE = (function(ce_){
 	function listenForNetwork(){
 	
 		function checkConnection(){
-			if(navigator.onLine)
+			//if(navigator.onLine)
+			if(navigatorOnLine)
 			{
 				isAlive()
 				.done(function(){
@@ -249,6 +252,10 @@ var CE = (function(ce_){
 	 *We tore the 
 	 */
 	function convertSession(session){ 
+		console.log('in session: ' );
+		console.log(session);
+		console.log(typeof session.session);
+		console.log(typeof session.session == "string");
 		//Resolves immediately if already a live session id
 		if(typeof session.session == "string") 
 		{
@@ -257,13 +264,62 @@ var CE = (function(ce_){
 		}
 		else
 		{
+			CE.DB.session.getCurrent().then(function(currsession){ 
+				return CE.DB.users.get(currsession.user);
+			}).done(function(curruser) { 
+				console.log('got user:');
+				console.log(curruser);
+				
+				//Get the machine id from the settings
+				return CE.DB.settings.get('machine_id').then(function(machine) { 
+				
+					console.log('trying to convert session: ');
+					console.log(session);
+					console.log('current user:');
+					console.log(curruser);
+					
+					//Make a login reuqest from the session 
+					var action = 'Login';
+					//var login_req = new LoginRequest(session.session.username, session.session.password, machine.machine_id, session.session.login_time, true);
+					var login_req = new LoginRequest(curruser.username, curruser.password, machine.machine_id, session.session.login_time, true);
+					var request = new PointOfSaleRequest(); // (null, login_req);
+					request.setRequest(login_req);
+					
+					return sforcePost(action, request)
+						.then( 
+							function(e) { 
+								var ssid = e.response.session;
+								return CE.DB.session.convert(session.id, ssid).then(function(e) { 
+									session.session = ssid;
+									return ssid; 
+								},
+								function(e){ 
+									CE.log.error("Failed to store converted session token in the local database.");
+								});
+							},				
+							function(e) { 
+								CE.log.error("Failed to convert offline session to an online session. ", e);
+								CE.util.alert("Couldn't Login", "The system has tried to log you in automatically since regaining internet access and failed login");
+								return e;
+							}
+						);					
+				});
+				
+			});
+			
+/*			
 			//Get the machine id from the settings
 			return CE.DB.settings.get('machine_id').then(function(machine) { 
 			
+				console.log('trying to convert session: ');
+				console.log(session);
+				console.log('current user:');
+				
 				//Make a login reuqest from the session 
 				var action = 'Login';
 				var login_req = new LoginRequest(session.session.username, session.session.password, machine.machine_id, session.session.login_time, true);
-				var request = new PointOfSaleRequest(null, login_req);
+				var request = new PointOfSaleRequest(); // (null, login_req);
+				request.setRequest(login_req);
 				
 				return sforcePost(action, request)
 					.then( 
@@ -284,6 +340,7 @@ var CE = (function(ce_){
 						}
 					);					
 			});
+		*/
 		}
 	}
 	
@@ -312,6 +369,9 @@ var CE = (function(ce_){
 			//The Sessions must be made online before sending off the transactions. 
 			var sessionIds = [];
 			
+			console.log('trans:');
+			console.log(trans);
+			
 			//Loop through all the transactions and get the sesssion ids
 			for(var i in trans)
 				sessionIds.push( trans[i].ssid );
@@ -322,13 +382,14 @@ var CE = (function(ce_){
 				//Get all the session tokens
 				//when we have the list of sessions for all the transactions
 				return CE.DB.session.get( sessionIds, true ).then( function(sessions) { 
-					
+					console.log('AFTER session.get using ' + JSON.stringify(sessionIds));
+					console.log(sessions);
 					//Will hold a list of all the convert session promises
 					var promises = []; 
-					CE.log.info("We have " + trans.length + " transactions with " + sessions.length + " sessions. We are going to make sure they are all live sessions.");
+					CE.log.info("We have " + trans.length + " transactions with " + Object.keys(sessions).length + " sessions. We are going to make sure they are all live sessions.");
 					
 					for(var i in sessions)
-					{			
+					{
 						//Convert all the sessions and save the promises so we know when they are all done.
 						promises.push( convertSession(sessions[i]) ); 
 					}
@@ -463,7 +524,8 @@ var CE = (function(ce_){
 		//The deffered object that will resolve when the post request completes
 		var def = $.Deferred();
 
-		if( !navigator.onLine )
+		//if( !navigator.onLine )
+		if(!navigatorOnLine)
 		{
 			CE.log.warn("Quitting POST becuase we are currently offline.");
 			return def.resolve();
@@ -665,7 +727,8 @@ var CE = (function(ce_){
 		var savePromise = storeLocalSale(copy); 
 		
 		//Only if we have internet access
-		if(navigator.onLine)
+		//if(navigator.onLine)
+		if(navigatorOnLine)
 		{
 			//Get the settings and make sure it is an online session
 			var sessionPromise = CE.DB.session.getCurrent().then(function(s) { return convertSession(s) }); //converts session if necessary
@@ -1017,5 +1080,6 @@ var CE = (function(ce_){
 		},
 	}
 	
+	console.log(Date.now() + ' finished sforce.js');
 	return ce_;
 })(CE || {});

@@ -19,6 +19,7 @@
   	"https://campeagle.secure.force.com/pos/services/apexrest/PointOfSale/*",
   	"http://campeagle.dev.cs15.force.com/pos/services/apexrest/PointOfSale/*",
 	"https://dev-campeagle.cs15.force.com/pos/services/apexrest/PointOfSale/*",
+	"https://campeagle.org/*",
   	"http://localhost/*"
   ]
 }

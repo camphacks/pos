@@ -207,13 +207,24 @@ var CE = (function(ce_){
                 var result = e.target.result;
                 if(result)
                 {
+					//console.log('good result... doing comparison...');
                     for(var i = 0; i < result.length; i++)
                     {
-                        if(result[i][index])
+						//console.log('checking result ' + result[i][index]);
+                        if(result[i][index] != null)
                         {
+							//console.log('searching result for ' + qstring[0]);
                             var res = '' + result[i][index];
-                            if(res.search(qstring[0]) >= 0)
-                                list.push(result[i]);
+							if(qstring[0] == '1' || qstring[0] == '0')
+							{
+								if(res == qstring[0])
+									list.push(result[i]);
+							}
+							else
+							{
+								if(res.search(qstring[0]) >= 0)
+									list.push(result[i]);	
+							}                            
                         }
 						/*
 						 if(result[i].name_lc)
@@ -242,6 +253,8 @@ var CE = (function(ce_){
 				 console.log(list);
 				 def.resolve(list);
 				 }*/
+				 //console.log('finished search...');
+				 //console.log(list);
                 def.resolve(list);
             };
 
@@ -284,33 +297,43 @@ var CE = (function(ce_){
         console.log(keys);
         console.log(store);
         console.log(index);
-        console.log(returnObject);
+        //console.log(returnObject);
 
         if(Array.isArray(keys) && keys.length > 1) //Get multiple at a time using cursor
         {
             //request = os.openCursor();
             request = os.getAll();
             var list = {};
-            console.log('getting multiple...');
-            console.log('keys:');
-            console.log(keys);
+            //console.log('getting multiple...');
+            //console.log('keys:');
+            //console.log(keys);
             request.onsuccess = function(e) {
 
                 var result = e.target.result;
-                console.log(e);
+                //console.log(e);
                 var ind = e.target.source.keyPath;
                 if(result)
                 {
                     for(var i = 0; i < result.length; i++)
                     {
                         var res = '' + result[i][ind];
-                        console.log('key: ' + res);
-                        console.log('value: ');
-                        console.log(result[i]);
+                        //console.log('key: ' + res);
+                        //console.log('value: ');
+                        //console.log(result[i]);
+						//console.log('keys');
+						//console.log(keys);
+						if(!isNaN(res))
+							res = parseInt(res);
+						//console.log(keys.indexOf(res) >= 0);
                         if(keys.indexOf(res) >= 0)
+						{
+							//console.log('putting result into list...');
                             list[res] = result[i];
+						}
                     }
                 }
+				//console.log('getFrom returning list: ');
+				//console.log(list);
                 def.resolve(list);
 				/*
 				 var cursor = e.target.result;
@@ -694,7 +717,8 @@ var CE = (function(ce_){
 
     var updateTransactions = function(processTransactionResponses){
         CE.log.debug("Updating transaction");
-
+		CE.log.debug(processTransactionResponses);
+		
         //Will hold all of the local transaction ids
         var local_ids = [];
 
