@@ -80,8 +80,12 @@
 		var val = parseFloat( $inp.val() );
 		
 		if( (isNaN(val) || val > max) && val > 0 && !values.isReturn )
-			CE.util.confirm('Balance Exceeded', 'The amount being charged is more than the balance on this account. Are you sure you want to continue?', {ok: "Yes", cancel: "No"})
+			CE.util.confirm('Balance Exceeded', 'The amount being charged is more than the balance on this account. Please inform the customer to use cash or credit.', {ok: "Ok"})
 				.fail(function(){ $inp.val( Math.max(max, 0).toFixed(2) ); $inp.trigger('change'); });
+
+		/*if( (isNaN(val) || val > max) && val > 0 && !values.isReturn )
+			CE.util.confirm('Balance Exceeded', 'The amount being charged is more than the balance on this account. Are you sure you want to continue?', {ok: "Yes", cancel: "No"})
+				.fail(function(){ $inp.val( Math.max(max, 0).toFixed(2) ); $inp.trigger('change'); });*/
 					
 		var dif = max - (values.isReturn ? -val : val);
 		$("#remaining-balance").text( dif.toFixed(2) );

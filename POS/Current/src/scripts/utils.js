@@ -92,12 +92,18 @@ var CE = (function(ce_) {
 				win.contentWindow.addEventListener('load', function() { 
 					var cancel = win.contentWindow.document.createElement('button');
 					cancel.innerText = buttons.cancel || 'Cancel';				
-					var ok = win.contentWindow.document.getElementById('ok');
-	
-					cancel.addEventListener('click', function() { def.reject(); win.close();});
-					ok.addEventListener('click', function() { def.resolve(); });		
 					
-					ok.parentNode.insertBefore(cancel, ok);	
+					if(buttons.cancel){
+						var ok = win.contentWindow.document.getElementById('ok');
+		
+						cancel.addEventListener('click', function() { def.reject(); win.close();});
+						ok.addEventListener('click', function() { def.resolve(); });		
+						
+						ok.parentNode.insertBefore(cancel, ok);	
+					} else {
+						var ok = win.contentWindow.document.getElementById('ok');
+						ok.addEventListener('click', function() { def.reject(); win.close();});
+					}
 				})
 			});
 		
