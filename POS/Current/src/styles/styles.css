@@ -251,7 +251,7 @@ container > div > content-wrapper {
 	background: #efefef;
 }
 
-content-wrapper {
+content-wrapper, form.content-wrapper {
 	background-color: white;
 	width: 100%;
 	/*display: block;*/

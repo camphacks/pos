@@ -51,6 +51,22 @@
 		
 		if(values.isReturn)
 			$('body').attr('data-mode', 'return');
+
+
+		$('#departmentComment').on('change', removeRequired());
+		
+		$('.department').click(function(){
+			console.log('clicked');
+			$('#co').attr('disabled', true);
+		})
+		
+		function removeRequired(){
+			$("#co").removeAttr("disabled", true);
+			console.log('focus');
+			if( $('#departmentComment').val().length == 1){
+				$("#co").removeAttr("disabled", false);
+			}
+		}
 	});
 	
 	/**
@@ -105,7 +121,7 @@
 			case '#cash' : paymentType = 'cash'; break;
 			case '#check' : paymentType = 'check'; break;
 			case '#account' : paymentType = 'account'; break;
-			// case '#department' : paymentType = 'department'; break;
+			 case '#department' : paymentType = 'department'; break;
 		}
 		
 		if(id == '#checkout')

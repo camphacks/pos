@@ -1,4 +1,14 @@
+//Defaults to true since we assume there will be a connection. If no connection is available it will be set to false
 var navigatorOnLine = false;
+var tmp = $.ajax("https://campeagle.org/index.php")
+	.done(function()
+	{
+		navigatorOnLine = true;
+	})
+	.fail(function()
+	{
+		navigatorOnLine = false;
+	})
 
 function Account(mod, id, evt_id, amt, fname, lname, gender, dob, evt_name, evt_start, evt_end){
 	this.mod_time = mod;

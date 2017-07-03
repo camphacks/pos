@@ -17,7 +17,7 @@
 						<h2 >Checkout</h2>
 					</div>
 				</nav>
-				<content-wrapper>
+				<form class="content-wrapper">
 					<sidebar>	
 						<h3>Payment Methods</h3>
 						<ul class="hotkeys">
@@ -226,7 +226,7 @@
 									<tr>
 										<td class="labelCol">Comments</td>
 										<td class="dataCol">
-											<textarea rows="5" data-name="comments"></textarea>
+											<textarea rows="5" data-name="comments" id="departmentComment"></textarea>
 									</tr>
 								</table>								
 							</inner>
@@ -281,7 +281,7 @@
 									<div class="error return">RETURN MODE</div>
 								</li>
 								<li class="hotkey">
-									<a class="btn" href="#checkout" data-name="checkout">
+									<a class="btn" href="#checkout" data-name="checkout" id="co">
 										<img />
 										<name>Checkout</name>
 										<key data-code="118">(F7)</key>
@@ -290,7 +290,7 @@
 							</ul>
 						</div>
 					</sidebar>
-				</content-wrapper>	
+				</form>	
 			</div>
 		</container>	
 	</body>
