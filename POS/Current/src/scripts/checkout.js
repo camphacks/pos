@@ -52,21 +52,19 @@
 		if(values.isReturn)
 			$('body').attr('data-mode', 'return');
 
-
-		$('#departmentComment').on('change', removeRequired());
-		
-		$('.department').click(function(){
-			console.log('clicked');
-			$('#co').attr('disabled', true);
+		//Wait for changes in the Department textarea - once they have a valid entry, the element will change to provide routing
+		$('#departmentComment').bind('input propertychange', function() {
+			if( $('#departmentComment').val().length > 1){
+				$("#co").replaceWith('<a type="submit" class="btn" href="#checkout" data-name="checkout" id="co">'+$('#co').html() + '</a>');
+			} else {
+				$("#co").replaceWith('<button type="submit" class="btn disabled" href="#checkout" data-name="checkout" id="co" disabled="disabled">'+$('#co').html() + '</button>');
+			}
 		})
 		
-		function removeRequired(){
-			$("#co").removeAttr("disabled", true);
-			console.log('focus');
-			if( $('#departmentComment').val().length == 1){
-				$("#co").removeAttr("disabled", false);
-			}
-		}
+		$('.department').click(function(){
+			$('#co').attr('disabled', true);
+			$('#co').addClass('disabled');
+		})
 	});
 	
 	/**
